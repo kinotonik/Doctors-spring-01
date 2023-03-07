@@ -3,15 +3,27 @@ package fr.wcs.doctor.controller;
 import fr.wcs.doctor.model.Doctor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 
+
 @Controller
 public class DoctorController {
+    /*quête n° 3 */
+    @GetMapping("/doctor/")
+    public String doctor(@RequestParam(required = false, defaultValue = "0") int number,
+                         @RequestParam(required = false, defaultValue = "John Smith") String name, Model model) {
+
+        model.addAttribute("doctorname", name);
+        model.addAttribute("doctornumber", number);
+        return "doctor";
+    }
     /*quête n° 2 */
-    @GetMapping("/doctor/{number}")
+/*    @GetMapping("/doctor/{number}")
     @ResponseBody
     public Doctor getDoctor(@PathVariable int number) {
         if (number == 13) {
@@ -22,7 +34,7 @@ public class DoctorController {
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Impossible de récupérer l'incarnation: " + number);
         }
-    }
+    }*/
 
     /*quête n° 1 */
 /*    @GetMapping("/doctor/1")
